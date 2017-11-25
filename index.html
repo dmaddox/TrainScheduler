@@ -6,6 +6,9 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Firebase Script -->
+	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 </head>
 <body>
 	<style>
@@ -49,10 +52,9 @@
 	    Current Time Schedule
 	  </div>
 
-		<table class="table card-body">
+		<table class="table card-body" id="train-table">
 		  <thead>
 		    <tr>
-		      <th scope="col">#</th>
 		      <th scope="col">Train Name</th>
 		      <th scope="col">Destination</th>
 		      <th scope="col">Frequency (min)</th>
@@ -62,7 +64,6 @@
 		  </thead>
 		  <tbody>
 		    <tr>
-		      <th scope="row">1</th>
 		      <td>Hogwarts Express</td>
 		      <td>London</td>
 		      <td>60</td>
@@ -95,7 +96,7 @@
 		    	<label for="freq">Frequency (min)</label>
 		    	<input type="number" class="form-control" id="freq">
 		 	</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" id="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div><!-- Ending Add Train form card -->
 </div> <!-- End main content -->
@@ -105,7 +106,10 @@
 <footer class="container-fluid text-center">
   <p>&copy Copyright</p>  
 </footer> <!-- End Footer -->
-	
+	<!-- Javascript file -->
 	<script src="assets/javascript/app.js"></script>
+	<!-- Moment script -->
+	 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+	
 </body>
 </html>
