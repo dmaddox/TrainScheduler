@@ -72,22 +72,22 @@
 	    <div class="card-header">
 	    	Add Train
 	    </div>
-		<form class="card-body">
+		<form class="card-body" novalidate>
 		  	<div class="form-group">
 		    	<label for="train-name">Train Name</label>
-		    	<input type="text" class="form-control" id="train-name">
+		    	<input type="text" class="form-control" id="train-name" required>
 			</div>
 			<div class="form-group">
 		    	<label for="dest-name">Destination</label>
-		    	<input type="text" class="form-control" id="dest-name">
+		    	<input type="text" class="form-control" id="dest-name" required>
 		 	</div>
 			<div class="form-group">
 		    	<label for="first-train">First Train Time (hh:mm - Military Time)</label>
-		    	<input type="text" class="form-control" id="first-train">
+		    	<input type="text" class="form-control" id="first-train" required>
 		 	</div>
 		 	<div class="form-group">
 		    	<label for="freq">Frequency (min)</label>
-		    	<input type="number" class="form-control" id="freq">
+		    	<input type="number" class="form-control" id="freq" required>
 		 	</div>
 			<button type="submit" id="submit" class="btn btn-primary">Submit</button>
 		</form>
