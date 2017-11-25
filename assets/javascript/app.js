@@ -28,12 +28,6 @@ $("#submit").on("click", function(event) {
 	firstTrain = $("#first-train").val().trim();
 	freq = $("#freq").val().trim();
 
-	// log variables to console
-	console.log("Local Var Train:" + trainName);
-	console.log("Local Var Destination:" + destName);
-	console.log("Local Var First Departure:" + firstTrain);
-	console.log("Local Var Frequency:" + freq);
-
 	// new object to store all train info
 	var trains = {
 		name: trainName,
@@ -63,42 +57,26 @@ db.ref().on("child_added", function (childSnapshot, prevChildKey) {
 	var dbFirst = childSnapshot.val().first;
 	var dbFreq = childSnapshot.val().freq;
 
-	// log db variables to console
-	console.log("Dabase Train:" + dbName);
-	console.log("Dabase Destination:" + dbDest);
-	console.log("Dabase First Departure:" + dbFirst);
-	console.log("Dabase Frequency:" + dbFreq);
 	
 	// momentify dbFirst
 	dbFirst = moment(dbFirst, "HH:mm");
- 	console.log("dbFirst : " + dbFirst.toString());
 
  	//create a now variable 
  	var now = moment();
- 	console.log("current time: " + now.toString());
 
  	// calculate next time
 	var next_time = dbFirst.clone().add(dbFreq, 'm');
-	console.log("next time: " + next_time.toString());
+	console.log(next_time.toString());
 
  	for (next_time; next_time < moment(); next_time.add(dbFreq, 'm')) {	
-			console.log("LESS THAN - next_time : " + next_time.toString());
 	};
 
-
-	
 	// calculate time left
-	console.log("GREATER - next_time : " + next_time.toString());
 	var timeLeft = next_time.diff(moment(), "m");
-	console.log(timeLeft.toString());
 
 	//prettify times
 	next_time = next_time.format("HH:mm").toString();
 	timeLeft = timeLeft.toString();
-
-	console.log("pretty next arrival: " + next_time);
-	console.log("pretty time left: " + timeLeft);
-
 	
 	// Add db data to html table
 	$("#train-table > tbody").append("<tr><td>" + dbName + "</td><td>" + dbDest + "</td><td>" + dbFreq + "</td><td>" + next_time + "</td><td>" + timeLeft + "</td></tr>");
