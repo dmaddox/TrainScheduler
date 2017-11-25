@@ -29,7 +29,6 @@ trainName.blur(function() {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-name").remove();
-		finalValidation();
 	};
 });
 destName.blur(function() {
@@ -42,7 +41,6 @@ destName.blur(function() {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-dest").remove();
-		finalValidation();
 	};
 });
 firstTrain.blur(function() {
@@ -57,7 +55,6 @@ firstTrain.blur(function() {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-first").remove();
-		finalValidation();
 	};
 });
 freq.blur(function() {
@@ -71,11 +68,14 @@ freq.blur(function() {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-freq").remove();
-		finalValidation();
 	};
 });
 
 finalValidation();
+
+$("input").keyup( function() {
+	finalValidation();
+});
 
 function finalValidation () {
 	// if inputs are empty, disable submit button
