@@ -18,7 +18,6 @@ var destName = $("#dest-name");
 var firstTrain = $("#first-train");
 var freq = $("#freq");
 
-
 // verify inputs
 trainName.blur(function() {
 	//if trainName is empty
@@ -30,7 +29,7 @@ trainName.blur(function() {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-name").remove();
-		$("#submit").attr("disabled", false);
+		finalValidation();
 	};
 });
 destName.blur(function() {
@@ -43,7 +42,7 @@ destName.blur(function() {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-dest").remove();
-		$("#submit").attr("disabled", false);
+		finalValidation();
 	};
 });
 firstTrain.blur(function() {
@@ -58,7 +57,7 @@ firstTrain.blur(function() {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-first").remove();
-		$("#submit").attr("disabled", false);
+		finalValidation();
 	};
 });
 freq.blur(function() {
@@ -72,13 +71,24 @@ freq.blur(function() {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-freq").remove();
-		$("#submit").attr("disabled", false);
+		finalValidation();
 	};
 });
 
+finalValidation();
+
+function finalValidation () {
+	// if inputs are empty, disable submit button
+	if (trainName.val().trim() === '' || destName.val().trim() === '' ||	firstTrain.val().trim() === '' ||freq.val().trim() === ''  ) {
+		$("#submit").attr("disabled", true);
+	} else {
+		$("#submit").attr("disabled", false);
+	};
+};
 
 // when user hits submit, retrieve all input information
 $("#submit").on("click", function(event) {
+
 	// prevent submit from refreshing page
 	event.preventDefault()
 
