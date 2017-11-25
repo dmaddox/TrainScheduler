@@ -65,21 +65,20 @@ db.ref().on("child_added", function (childSnapshot, prevChildKey) {
  	var now = moment();
 
  	// calculate next time
-	var next_time = dbFirst.clone().add(dbFreq, 'm');
-	console.log(next_time.toString());
+	// var next_time = dbFirst.clone().add(dbFreq, 'm');
 
- 	for (next_time; next_time < moment(); next_time.add(dbFreq, 'm')) {	
+ 	for (dbFirst; dbFirst < moment(); dbFirst.add(dbFreq, 'm')) {	
 	};
 
 	// calculate time left
-	var timeLeft = next_time.diff(moment(), "m");
+	var timeLeft = dbFirst.diff(moment(), "m");
 
 	//prettify times
-	next_time = next_time.format("HH:mm").toString();
+	dbFirst = dbFirst.format("HH:mm").toString();
 	timeLeft = timeLeft.toString();
 	
 	// Add db data to html table
-	$("#train-table > tbody").append("<tr><td>" + dbName + "</td><td>" + dbDest + "</td><td>" + dbFreq + "</td><td>" + next_time + "</td><td>" + timeLeft + "</td></tr>");
+	$("#train-table > tbody").append("<tr><td>" + dbName + "</td><td>" + dbDest + "</td><td>" + dbFreq + "</td><td>" + dbFirst + "</td><td>" + timeLeft + "</td></tr>");
 })
 
 
