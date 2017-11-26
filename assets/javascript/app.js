@@ -139,6 +139,23 @@ db.ref("/trains").on("child_added", function (childSnapshot, prevChildKey) {
 	array.push({"name": dbName, "dest": dbDest, "first": dbFirst, "freq": dbFreq},);
 });
 
+// when the database updates, update the screen array
+db.ref("/trains").on("child_removed", function (childSnapshot, prevChildKey) {
+
+
+	// store db data into variables
+	dbName = childSnapshot.val().name;
+	dbDest = childSnapshot.val().dest;
+	dbFirst = childSnapshot.val().first;
+	dbFreq = childSnapshot.val().freq;
+
+	//get the index of the childSnapshot
+	var removed = array.indexOf({"name": dbName, "dest": dbDest, "first": dbFirst, "freq": dbFreq});
+
+	// push data to an array object
+	array.splice(removed, 1);
+});
+
 // Every minute, display time
 function fn60sec() {
 	var now = moment().format('HH:mm');
@@ -180,9 +197,10 @@ function render() {
 };
 
 
-// // when the database updates, update the screen array
+// when the database updates, update the screen array
 db.ref().on("value", function (snap) {
 	render();
 });
+
 
 

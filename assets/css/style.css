@@ -23,3 +23,6 @@ h2 {
 .card {
 	margin: 25px;
 }
+th {
+	font-weight: bold;
+}
