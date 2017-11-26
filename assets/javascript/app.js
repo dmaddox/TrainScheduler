@@ -101,12 +101,6 @@ $("#submit").on("click", function(event) {
 	// prevent submit from refreshing page
 	event.preventDefault()
 
-	// // initialize variables with field inputs
-	// trainName = trainName.val().trim();
-	// destName = destName.val().trim();
-	// firstTrain = firstTrain.val().trim();
-	// freq = freq.val().trim();
-
 	// new object to store all train info
 	var trains = {
 		name: trainNameText,
@@ -125,37 +119,25 @@ $("#submit").on("click", function(event) {
 	$("#freq").val("");
 })
 
+// initialize db variables
+var dbName;
+var dbDest;
+var dbFirst;
+var dbFreq;
+
+var array = [];
+
 // when the database updates, update the screen array
 db.ref("/trains").on("child_added", function (childSnapshot, prevChildKey) {
 	// store db data into variables
-	var dbName = childSnapshot.val().name;
-	var dbDest = childSnapshot.val().dest;
-	var dbFirst = childSnapshot.val().first;
-	var dbFreq = childSnapshot.val().freq;
+	dbName = childSnapshot.val().name;
+	dbDest = childSnapshot.val().dest;
+	dbFirst = childSnapshot.val().first;
+	dbFreq = childSnapshot.val().freq;
 
-	
-	// momentify dbFirst
-	dbFirst = moment(dbFirst, "HH:mm");
-
- 	//create a now variable 
- 	var now = moment();
-
- 	// calculate next time
-	// var next_time = dbFirst.clone().add(dbFreq, 'm');
-
- 	for (dbFirst; dbFirst < moment(); dbFirst.add(dbFreq, 'm')) {	
-	};
-
-	// calculate time left
-	var timeLeft = dbFirst.diff(moment(), "m");
-
-	//prettify times
-	dbFirst = dbFirst.format("HH:mm").toString();
-	timeLeft = timeLeft.toString();
-	
-	// Add db data to html table
-	$("#train-table > tbody").append("<tr><td>" + dbName + "</td><td>" + dbDest + "</td><td>" + dbFreq + "</td><td>" + dbFirst + "</td><td>" + timeLeft + "</td></tr>");
-})
+	// push data to an array object
+	array.push({"name": dbName, "dest": dbDest, "first": dbFirst, "freq": dbFreq},);
+});
 
 // Every minute, display time
 function fn60sec() {
@@ -168,5 +150,39 @@ function fn60sec() {
 fn60sec();
 setInterval(fn60sec, 60*1000);
 
+function render() {
+	$("#train-table > tbody").empty();
+	//as long as there are items in the array
+	for (z = 0; z < array.length; z++) {	
+
+		// momentify dbFirst
+		objFirst = moment(array[z].first, "HH:mm");
+
+	 	//create a now variable 
+	 	var now = moment();
+
+	 	// calculate next time
+		var next_time = objFirst.clone().add(array[z].freq, 'm');
+
+	 	for (objFirst; objFirst < moment(); objFirst.add(array[z].freq, 'm')) {	
+		};
+
+		// calculate time left
+		var timeLeft = objFirst.diff(moment(), "m");
+
+		//prettify times
+		objFirst = objFirst.format("HH:mm").toString();
+		timeLeft = timeLeft.toString();
+		
+		// Add db data to html table
+		$("#train-table > tbody").append("<tr><td>" + array[z].name + "</td><td>" + array[z].dest + "</td><td>" + array[z].freq + "</td><td>" + objFirst + "</td><td>" + timeLeft + "</td></tr>");
+	};
+};
+
+
+// // when the database updates, update the screen array
+db.ref().on("value", function (snap) {
+	render();
+});
 
 
