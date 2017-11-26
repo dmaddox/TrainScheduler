@@ -107,7 +107,7 @@ $("#submit").on("click", function(event) {
 	};
 
 	// upload data to the database
-	db.ref().push(trains);
+	db.ref("/trains").push(trains);
 
 	// clears text inputs
 	$("#train-name").val("");
@@ -117,7 +117,7 @@ $("#submit").on("click", function(event) {
 })
 
 // when the database updates, update the screen array
-db.ref().on("child_added", function (childSnapshot, prevChildKey) {
+db.ref("/trains").on("child_added", function (childSnapshot, prevChildKey) {
 	// store db data into variables
 	var dbName = childSnapshot.val().name;
 	var dbDest = childSnapshot.val().dest;

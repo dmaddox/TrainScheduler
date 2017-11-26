@@ -1,0 +1,25 @@
+body {
+	background-image: url("../images/bg.gif");
+	background-repeat: repeat;
+	  background-position: left top;
+	  font-family: 'Karla', sans-serif;
+}
+.jumbotron, .footer {
+	background-color: transparent;
+    padding: 45px;
+}
+h1, h2, p {
+	color: white;
+	font-family: 'Space Mono', monospace;
+}
+h2 {
+	font-size: 24px;
+	font-weight: lighter;
+}
+.navbar {
+	margin-bottom: 50px;
+	border-radius: 0;
+}
+.card {
+	margin: 25px;
+}

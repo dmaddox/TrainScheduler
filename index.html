@@ -2,44 +2,25 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Hogsmeade Station</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- Firebase Script -->
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-</head>
-<body>
-	<style>
-    /* Remove the navbar's default rounded borders and increase the bottom margin */ 
-    .navbar {
-      margin-bottom: 50px;
-      border-radius: 0;
-    }
-    
-    /* Remove the jumbotron's default bottom margin */ 
-     .jumbotron {
-      margin-bottom: 0;
-    }
-   	.card {
-   		margin: 25px;
-   	}
-
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-  </style>
+	<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico" />
+	<link href="https://fonts.googleapis.com/css?family=Karla|Space+Mono" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Karla|Space+Mono" rel="stylesheet">
 </head>
 <body>
 
 <!-- Jumbotron -->
 <div class="jumbotron">
-  <div class="container text-center">
-    <h1>Hogsmeade Station</h1>      
-    <p>Catch your train!</p>
+  <div class="container text-center" id="h1">
+    <h1>Intergallactic Station</h1>      
+    <h2>Catch your star!</h2>
+    <h2>Current Time: <span id="time"></span></h2>
   </div>
 </div><!-- End Jumbotron -->
 
@@ -55,7 +36,7 @@
 		<table class="table card-body" id="train-table">
 		  <thead>
 		    <tr>
-		      <th scope="col">Train Name</th>
+		      <th scope="col">Shuttle Name</th>
 		      <th scope="col">Destination</th>
 		      <th scope="col">Frequency (min)</th>
 		      <th scope="col">Next Arrival</th>
@@ -70,11 +51,11 @@
 	<!-- Beginning Add Train form card -->
 	<div class="card">
 	    <div class="card-header">
-	    	Add Train
+	    	Add Shuttle
 	    </div>
 		<form class="card-body" novalidate>
 		  	<div class="form-group">
-		    	<label for="train-name">Train Name</label>
+		    	<label for="train-name">Shuttle Name</label>
 		    	<input type="text" class="form-control" id="train-name" required>
 			</div>
 			<div class="form-group">
@@ -82,7 +63,7 @@
 		    	<input type="text" class="form-control" id="dest-name" required>
 		 	</div>
 			<div class="form-group">
-		    	<label for="first-train">First Train Time (hh:mm - Military Time)</label>
+		    	<label for="first-train">First Shuttle Time (hh:mm - Military Time)</label>
 		    	<input type="text" class="form-control" id="first-train" required>
 		 	</div>
 		 	<div class="form-group">
@@ -96,13 +77,13 @@
 
 
 <!-- Footer -->
-<footer class="container-fluid text-center">
-  <p>&copy Copyright</p>  
+<footer class="container-fluid text-center footer">
+  <p>&copy Copyright Stardust 3017</p>  
 </footer> <!-- End Footer -->
+	<!-- Moment script -->
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<!-- Javascript file -->
 	<script src="assets/javascript/app.js"></script>
-	<!-- Moment script -->
-	 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-	
+
 </body>
 </html>
