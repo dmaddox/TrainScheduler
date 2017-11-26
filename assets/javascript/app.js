@@ -13,58 +13,67 @@
 var db = firebase.database();
 
 // declare variables
-var trainName = $("#train-name");
-var destName = $("#dest-name");
-var firstTrain = $("#first-train");
-var freq = $("#freq");
+var trainNameField = $("#train-name");
+var destNameField = $("#dest-name");
+var firstTrainField = $("#first-train");
+var freqField = $("#freq");
+
+var trainNameText;
+var destNameText;
+var firstTrainText;
+var freqText;
 
 // verify inputs
-trainName.blur(function() {
+trainNameField.blur(function() {
+	trainNameText = $("#train-name").val().trim();
 	//if trainName is empty
-	if(trainName.val().trim() === '') {
+	if(trainNameText === '') {
 		// remove any existing warnings
 		$("#alert-name").remove("div");
 		// set warning message & disable submit
-		trainName.parent().append("<div class='alert alert-danger' id='alert-name' role='alert'>You must input the train's name.</div>");
+		trainNameField.parent().append("<div class='alert alert-danger' id='alert-name' role='alert'>You must input the shuttle's name.</div>");
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-name").remove();
 	};
 });
-destName.blur(function() {
+destNameField.blur(function() {
+	destNameText = $("#dest-name").val().trim();
 	//if trainName is empty
-	if(destName.val().trim() === '') {
+	if(destNameText === '') {
 		// remove any existing warnings
 		$("#alert-dest").remove("div");
 		// set warning message & disable submit
-		destName.parent().append("<div class='alert alert-danger' id='alert-dest' role='alert'>You must input the train's destination.</div>");
+		destNameField.parent().append("<div class='alert alert-danger' id='alert-dest' role='alert'>You must input the shuttle's destination.</div>");
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-dest").remove();
 	};
 });
-firstTrain.blur(function() {
+firstTrainField.blur(function() {
+	firstTrainText = $("#first-train").val().trim();
 	//if firstTrain is empty or if it doesnt match military time
 	// setup military time checks
-	if(firstTrain.val().trim().match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/) === null) {
+	if(firstTrainText.match(/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/) === null) {
 
 		// remove any existing warnings
 		$("#alert-first").remove("div");
 		// set warning message & disable submit
-		firstTrain.parent().append("<div class='alert alert-danger' id='alert-first' role='alert'>Input the train's first departure time in a valid military time. Ex: \"00:30\"</div>");
+		firstTrainField.parent().append("<div class='alert alert-danger' id='alert-first' role='alert'>Input the shuttle's first departure time in a valid military time. Ex: \"00:30\"</div>");
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-first").remove();
 	};
 });
-freq.blur(function() {
+freqField.blur(function() {
+	freqText = $("#freq").val().trim();
 	//if firstTrain is empty or if it doesnt match military time
-	var a = parseInt(freq.val().trim())
+	var a = parseInt(freqText)
 	if(!Number.isInteger(a)) {
 		// remove any existing warnings
 		$("#alert-freq").remove("div");
 		// set warning message & disable submit
-		freq.parent().append("<div class='alert alert-danger' id='alert-freq' role='alert'>Input the train's frequency of departure in minutes. Ex: \"45\"</div>");
+		freqField.parent().append("<div class='alert alert-danger' id='alert-freq' role='alert'>Input the shuttle's frequency of departure in minutes. Ex: \"45\"</div>");
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#alert-freq").remove();
@@ -79,7 +88,7 @@ $("input").keyup( function() {
 
 function finalValidation () {
 	// if inputs are empty, disable submit button
-	if (trainName.val().trim() === '' || destName.val().trim() === '' ||	firstTrain.val().trim() === '' ||freq.val().trim() === ''  ) {
+	if ($("#train-name").val().trim() === '' || $("#dest-name").val().trim() === '' || $("#first-train").val().trim() === '' || $("#freq").val().trim() === ''  ) {
 		$("#submit").attr("disabled", true);
 	} else {
 		$("#submit").attr("disabled", false);
@@ -92,18 +101,18 @@ $("#submit").on("click", function(event) {
 	// prevent submit from refreshing page
 	event.preventDefault()
 
-	// initialize variables with field inputs
-	trainName = trainName.val().trim();
-	destName = destName.val().trim();
-	firstTrain = firstTrain.val().trim();
-	freq = freq.val().trim();
+	// // initialize variables with field inputs
+	// trainName = trainName.val().trim();
+	// destName = destName.val().trim();
+	// firstTrain = firstTrain.val().trim();
+	// freq = freq.val().trim();
 
 	// new object to store all train info
 	var trains = {
-		name: trainName,
-		dest: destName,
-		first: firstTrain,
-		freq: freq
+		name: trainNameText,
+		dest: destNameText,
+		first: firstTrainText,
+		freq: freqText
 	};
 
 	// upload data to the database
