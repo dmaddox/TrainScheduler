@@ -148,6 +148,16 @@ db.ref("/trains").on("child_added", function (childSnapshot, prevChildKey) {
 	$("#train-table > tbody").append("<tr><td>" + dbName + "</td><td>" + dbDest + "</td><td>" + dbFreq + "</td><td>" + dbFirst + "</td><td>" + timeLeft + "</td></tr>");
 })
 
+// Every minute, display time
+function fn60sec() {
+	var now = moment().format('HH:mm');
+	$("#time").html(now);
+	// store the updated time in firebase
+	db.ref("/timer").set(now);
+
+}
+fn60sec();
+setInterval(fn60sec, 60*1000);
 
 
 
